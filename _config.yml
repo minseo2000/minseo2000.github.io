@@ -10,11 +10,11 @@ version:          1.0
 gitbook_version:  3.2.3
 
 url:              'https://minseo2000.github.io'
-baseurl:          '/jekyll-gitbook'
+baseurl:          '/'
 rss:              RSS
 
 # bootstrap: use the remote theme for the site itself
-remote_theme: minseo2000.github.io
+remote_theme: minseo2000/minseo2000.github.io
 
 toc:
   enabled: true
