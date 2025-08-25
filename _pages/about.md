@@ -1,6 +1,6 @@
 ---
 title: About
-author: Tao He
+author: 박민서
 date: 2022-02-04
 category: Jekyll
 layout: post
