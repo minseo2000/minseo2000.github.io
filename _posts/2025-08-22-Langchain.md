@@ -1,5 +1,5 @@
 ---
-title: 랭체인
+title: LangChain
 author: 박민서
 date: 2025-08-22
 category: Langchain
