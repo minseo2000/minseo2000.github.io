@@ -2,7 +2,7 @@
 title: Multi Agent System
 author: 박민서
 date: 2025-08-25
-category: Jekyll
+category: AI
 layout: post
 ---
 
