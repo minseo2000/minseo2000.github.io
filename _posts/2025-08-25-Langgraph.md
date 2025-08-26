@@ -6,7 +6,6 @@ category: AI
 layout: post
 ---
 
-# LangGraph
 랭그래프는 에이전트 오케스트레이션 프레임워크이다.
 
 <a href="https://langchain-ai.github.io/langgraph/concepts/why-langgraph/">LangGraph 공식 홈페이지</a>

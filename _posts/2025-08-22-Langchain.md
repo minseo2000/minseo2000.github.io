@@ -7,7 +7,6 @@ layout: post
 mermaid: true
 ---
 
-# 랭체인, LangChain (Language Chain)
 <hr>
 Langchain은 애플리케이션에 LLM을 쉽게 추가할 수 있도록하는 프레임워크입니다.
 

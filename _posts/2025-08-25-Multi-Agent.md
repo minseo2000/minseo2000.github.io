@@ -6,7 +6,6 @@ category: AI
 layout: post
 ---
 
-# Multi Agent System
 
 - 멀티 에이전트 시스템을 직접 만들어보려고 한다. 주제는 다음과 같다.
 <br>
