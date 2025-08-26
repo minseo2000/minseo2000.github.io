@@ -52,40 +52,390 @@ Obs: The Apple Remote is a remote control introduced in October 2005 by Apple ..
 ### Template Code
 다음은 ReAct 에이전트를 만들 템플릿 코드입니다.
 ```python
-from langgraph.prebuilt import create_react_agent
-from dotenv import load_dotenv
-from get_llm import make_llm
 import os
+from dotenv import load_dotenv
+from typing import Optional
+from pydantic import BaseModel, Field
 
+from langchain.agents import create_react_agent, AgentExecutor, create_structured_chat_agent
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.chat_history import InMemoryChatMessageHistory
+from langchain_core.runnables import RunnableWithMessageHistory
+from langchain import hub
+from langchain_core.tools import tool
+from langchain.agents.output_parsers import ReActJsonSingleInputOutputParser
+from langchain.schema import AgentAction, AgentFinish
+import json
+
+import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+
+load_dotenv()
+BASE_URL = os.getenv("BASE_URL", "")
+API_KEY  = os.getenv("API_KEY", "EMPTY")
+MODEL_ID = os.getenv("MODEL_ID", "Qwen/Qwen2.5-VL-32B-Instruct-AWQ")
+
+def make_llm(temperature: float = 0.7) -> ChatOpenAI:
+    """
+    vLLM(OpenAI 호환) 서버에 붙는 ChatOpenAI.
+    """
+    return ChatOpenAI(
+        base_url=BASE_URL,
+        api_key=API_KEY,
+        model=MODEL_ID,
+        streaming=True,          # 스트리밍 사용
+        temperature=temperature,
+    )
+
+class StrictJsonOutputParser(ReActJsonSingleInputOutputParser):
+    def parse(self, text: str):
+        try:
+            return super().parse(text)
+        except Exception:
+            if "Action:" in text and "Action Input:" in text:
+                try:
+                    # 툴 이름 추출
+                    tool_line = text.split("Action:", 1)[1].split("\n", 1)[0].strip()
+                    tool_name = tool_line.strip()
+
+                    # 입력값 추출
+                    after = text.split("Action Input:", 1)[1].strip()
+                    if after.startswith("'") or after.startswith('"'):
+                        after = after.strip("'\"")
+
+                    action_input = json.loads(after)
+                    return AgentAction(tool=tool_name, tool_input=action_input, log=text)
+
+                except Exception as e:
+                    raise ValueError(f"❌ JSON 파싱 실패: {e}\n{text}")
+
+            if "Final Answer:" in text:
+                answer = text.split("Final Answer:", 1)[1].strip()
+                return AgentFinish(return_values={"output": answer}, log=text)
+
+            raise
+
+
+
+# -----------------------
+# 1. 환경변수 로드
+# -----------------------
 load_dotenv()
 MODEL_ID = os.getenv("MODEL_ID", "Qwen/Qwen2.5-VL-32B-Instruct-AWQ")
 
+import os
+from langchain_core.tools import tool, StructuredTool
 
-class AgentTemplate:
+# -----------------------
+# 1. 파일 읽기
+# -----------------------
+def read_file(path: str) -> str:
+    """지정된 파일을 읽습니다.
 
-    def __init__(self):
-        # 도구 만들기
-        # MCP 서버로 만들지 결정하기
-        # 메모리 탑재 해주기
+    Args:
+        path: 읽을 파일의 경로
+    """
+    if not os.path.exists(path):
+        return f"❌ File not found: {path}"
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
 
-        # 여기에 에이전트 생성하기
-        self.agent = create_react_agent(
+read_file_tool = StructuredTool.from_function(
+    func=read_file,
+    name="read_file",
+    description="지정된 파일의 내용을 읽습니다."
+)
+
+
+# -----------------------
+# 2. 파일 쓰기
+# -----------------------
+def write_file(path: str, content: str) -> str:
+    """지정된 파일에 내용을 씁니다.
+
+    Args:
+        path: 작성할 파일 경로
+        content: 파일에 쓸 텍스트 내용
+    """
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content)
+    return f"✅ File written: {path}"
+
+write_file_tool = StructuredTool.from_function(
+    func=write_file,
+    name="write_file",
+    description="지정된 파일에 텍스트를 씁니다. (path, content 필요)"
+)
+
+
+# -----------------------
+# 3. 파일 삭제
+# -----------------------
+def delete_file(path: str) -> str:
+    """지정된 파일을 삭제합니다.
+
+    Args:
+        path: 삭제할 파일 경로
+    """
+    if not os.path.exists(path):
+        return f"❌ File not found: {path}"
+    os.remove(path)
+    return f"🗑️ File deleted: {path}"
+
+delete_file_tool = StructuredTool.from_function(
+    func=delete_file,
+    name="delete_file",
+    description="지정된 파일을 삭제합니다."
+)
+
+
+# -----------------------
+# 4. 툴 리스트
+# -----------------------
+FILE_TOOLS = [read_file_tool, write_file_tool, delete_file_tool]
+
+
+# -----------------------
+# 5. Agent 클래스 정의
+# -----------------------
+class UpLoaderAgent:
+    def __init__(self, session_id: str = "default_session"):
+        self.session_id = session_id
+        self.store = {}
+
+        def get_session_history(session_id: str):
+            if session_id not in self.store:
+                self.store[session_id] = InMemoryChatMessageHistory()
+            return self.store[session_id]
+
+        # ✅ 프롬프트 (LangChain ReAct 권장 구조)
+        prompt = ChatPromptTemplate.from_messages([
+            ("system",
+             "You are a helpful AI assistant. You can manage files using these tools:\n\n{tools}\n\n"
+             "Follow this process strictly:\n\n"
+             "Question: {input}\n"
+             "Thought: think step by step\n"
+             "Action: one of [{tool_names}]\n"
+             "Action Input: MUST be a JSON object matching the tool schema. "
+             "For example, to call read_file, use:\n"
+             "Action: read_file\n"
+             "Action Input: {{\"path\": \"test.txt\"}}\n\n"
+             "Do NOT return a string or tuple. Always use JSON.\n"
+             "Observation: result of the action\n"
+             "Final Answer: the final answer to the user.\n"),
+            MessagesPlaceholder("history"),
+            ("human", "{input}"),
+            ("assistant", "{agent_scratchpad}"),
+        ])
+
+        # ✅ ReAct Agent 생성
+        react_agent = create_react_agent(
             llm=make_llm(),
-            model=MODEL_ID,
+            tools=FILE_TOOLS,
+            prompt=prompt,
+            output_parser=StrictJsonOutputParser()  # 👈 여기!
+        )
+
+        # ✅ Executor
+        executor = AgentExecutor.from_agent_and_tools(
+            agent=react_agent,
+            tools=FILE_TOOLS,
+            handle_parsing_errors=True,
+            verbose=True
+        )
+
+        # ✅ 메모리 래핑
+        self.agent = RunnableWithMessageHistory(
+            executor,
+            get_session_history,
+            input_messages_key="input",
+            history_messages_key="history",
+        )
+
+    def run(self, user_input: str):
+        return self.agent.invoke(
+            {"input": user_input},
+            config={"configurable": {"session_id": self.session_id}}
         )
 
 
+# -----------------------
+# 6. 테스트
+# -----------------------
 if __name__ == "__main__":
-    
-    test_agent = AgentTemplate()
-    print(test_agent.agent.invoke("테스트입니다"))
+    test_agent = UpLoaderAgent(session_id="test_user_1")
 
+    # 파일 쓰기
+    resp1 = test_agent.run("test.txt 파일에 플러터 예제 코드 만들어서 써줘")
+    print(resp1["output"])
 
+    # 파일 읽기
+    resp2 = test_agent.run("test.txt 파일 내용을 읽어줘")
+    print(resp2["output"])
+
+    # 파일 삭제
+    #resp3 = test_agent.run("test.txt 파일을 삭제해줘")
+   # print(resp3["output"])
 
 ```
 
-## 배포/퍼블리싱 에이전트 구현
+## WorkFLow 만들기 with LangGraph
 
 <hr>
+
+LangGraph로 만든 에이전트를 노드로 만들어, 노드간 엣지를 이어 에이전트끼리 통신 가능하게 만들 수 있다.
+
+```python
+from typing import Any, Dict, List
+from langgraph.graph import StateGraph, START, END
+from langchain_openai import ChatOpenAI
+from pydantic import BaseModel, Field
+from dotenv import load_dotenv
+import os
+from agents.file_agent import UpLoaderAgent
+
+load_dotenv()
+BASE_URL = os.getenv("BASE_URL", "")
+API_KEY = os.getenv("API_KEY", "EMPTY")
+MODEL_ID = os.getenv("MODEL_ID", "Qwen/Qwen2.5-VL-32B-Instruct-AWQ")
+
+file_agent = UpLoaderAgent(session_id="test_user_1")
+
+def make_llm(temperature: float = 0.7) -> ChatOpenAI:
+    return ChatOpenAI(
+        base_url=BASE_URL,
+        api_key=API_KEY,
+        model=MODEL_ID,
+        streaming=True,
+        temperature=temperature,
+    )
+
+class AgentState(BaseModel):
+    user_message: str = Field(default="", description="사용자 입력 원문")
+    intent: str = Field(default="", description="사용자의 요청이 분류된 작업 종류 (예: file_agent, writer_agent)")
+    task_details: str = Field(default="", description="추가 정보")
+    retrieved_docs: List[str] = Field(default_factory=list, description="검색 결과")
+    tool_result: Any = Field(default=None, description="도구 실행 결과")
+    response: str = Field(default="", description="최종 응답 결과")
+    metadata: Dict[str, Any] = Field(default_factory=dict, description="메타데이터")
+    approved: bool = False  # ✅ 사용자 승인 여부
+
+"""
+Node Definitions
+"""
+
+# ------------------------
+# intent 분류 노드 (state 업데이트)
+# ------------------------
+def classify_intent_node(state: AgentState) -> dict:
+    llm = make_llm(temperature=0.0)
+
+    prompt = f"""
+    사용자의 요청을 보고 어떤 에이전트를 사용할지 결정하세요.
+    가능한 값: "file_agent", "writer_agent"
+
+    사용자 입력: {state.user_message}
+
+    반드시 위 값 중 하나만 출력하세요.
+    """
+    response = llm.invoke(prompt).content.strip()
+    print("LLM intent 분류 결과:", response)
+
+    if "file" in response:
+        intent = "file_agent"
+    elif "writer" in response:
+        intent = "writer_agent"
+    else:
+        intent = "writer_agent"
+
+    # ✅ dict 반환 → state에 병합됨
+    return {"intent": intent}
+
+# ------------------------
+# 사용자 승인 요청 노드
+# ------------------------
+def request_user_confirmation(state: AgentState) -> dict:
+    print(f"\n⚠️ 에이전트가 제안: '{state.intent}' 작업을 수행하려 합니다.")
+    answer = input("이 작업을 진행할까요? (y/n): ")
+    if answer.lower().startswith("y"):
+        return {"approved": True}
+    else:
+        return {"approved": False, "response": "❌ 사용자가 작업을 거부했습니다."}
+
+# ------------------------
+# 에이전트 실행 노드
+# ------------------------
+def file_agent_node(state: AgentState):
+    if not state.approved:
+        return {"response": "파일 작업이 취소되었습니다."}
+    response = file_agent.run(state.user_message)
+    return {"response": response}
+
+def writer_agent_node(state: AgentState):
+    if not state.approved:
+        return {"response": "글쓰기 작업이 취소되었습니다."}
+    return {"response": "✍️ 글쓰기 에이전트 실행 완료"}
+
+# ------------------------
+# 그래프 정의
+# ------------------------
+def create_graph():
+    workflow = StateGraph(AgentState)
+
+    workflow.add_node("classify", classify_intent_node)
+    workflow.add_node("ask_approval", request_user_confirmation)
+    workflow.add_node("file_agent", file_agent_node)
+    workflow.add_node("writer_agent", writer_agent_node)
+
+    # 시작 → intent 분류
+    workflow.add_edge(START, "classify")
+
+    # intent 결과에 따라 approval 단계로 이동
+    workflow.add_conditional_edges(
+        "classify",
+        lambda s: s.intent,
+        {"file_agent": "ask_approval", "writer_agent": "ask_approval"}
+    )
+
+    # 승인 → 에이전트 실행
+    workflow.add_conditional_edges(
+        "ask_approval",
+        lambda s: s.intent,
+        {"file_agent": "file_agent", "writer_agent": "writer_agent"}
+    )
+
+    workflow.add_edge("file_agent", END)
+    workflow.add_edge("writer_agent", END)
+
+    return workflow.compile()
+
+# ------------------------
+# 실행
+# ------------------------
+def main():
+    print("-======LangGraph Human In the loop 예제=======")
+    app = create_graph()
+    result = app.get_graph().draw_mermaid_png()
+    with open("./graph.png", "wb") as f:
+        f.write(result)
+    state = AgentState(user_message="make.md 파일 하나 만들어줘")
+    final = app.invoke(state)
+    print("\n최종 응답:", final)
+
+    print("\n======워크 플로 종료 =======")
+
+if __name__ == "__main__":
+    main()
+```
+- 테스트를 위해서, 의도 분류를 통해 사용자 요청에 대해 어떤 에이전트를 실행시켜야하는지 만들었다.<br>
+
+다음으로는 에이전트 간 통신을 가능하게 만드는 것!
+
+
+## 블로그 글 Reviewer Agent 만들기
+
+<hr>
+
 
 
