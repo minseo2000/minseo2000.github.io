@@ -1,5 +1,5 @@
 ---
-title: Network
+title: Network Equipments
 author: 박민서
 date: 2025-09-01
 category: Network
