@@ -117,6 +117,34 @@ permalink: /
       </p>
     </section>
     <section class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4">내 소개</h2>
+      <div class="bg-card p-6 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
+        <p class="text-card-foreground mb-4">
+          저는 박민서입니다. 프론트엔드 개발자이자 디자이너로, 웹을 통해 창의적인 아이디어를 구현하고
+          사람들과 소통하는 것을 좋아합니다. 이 블로그는 제 기술, 일상, 문화, 여행 등 다양한 관심사와 경험을
+          기록하고 공유하기 위한 공간입니다.
+        </p>
+        <p class="text-card-foreground mb-4">
+          저는 AI 기술에 깊은 관심을 가지고 있으며, 머신러닝과 딥러닝을 활용한 웹 개발 및 인터페이스 디자인에 대한 연구를 진행하고 있습니다.
+          최근에는 AI를 활용한 사용자 경험 개선 프로젝트에 참여하며, 자연어 처리(NLP)와 컴퓨터 비전 기술을 탐구하고 있습니다.
+        </p>
+        <div class="flex flex-wrap gap-3 mb-4">
+          <a href="https://github.com/minseo2000/ai-experiments" target="_blank" rel="noopener noreferrer" class="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-secondary/80 transition-colors">
+            AI 실험 프로젝트
+          </a>
+          <a href="https://medium.com/@minseo2000/ai-development-journey" target="_blank" rel="noopener noreferrer" class="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-secondary/80 transition-colors">
+            AI 개발 일기 (Medium)
+          </a>
+        </div>
+        <img
+          aria-hidden="true"
+          alt="ai-project-image"
+          src="https://picsum.photos/seed/ai/400/250"
+          class="w-full h-40 object-cover rounded-md"
+        />
+      </div>
+    </section>
+    <section class="mb-8">
       <h2 class="text-2xl font-semibold mb-4">내 포트폴리오</h2>
       <div class="bg-card p-6 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
         <h3 class="text-lg font-medium mb-4">박민서</h3>
@@ -126,13 +154,13 @@ permalink: /
           기록하고 공유하기 위한 공간입니다.
         </p>
         <div class="flex flex-wrap gap-3 mb-4">
-          <a href="#" class="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-secondary/80 transition-colors">
+          <a href="https://github.com/minseo2000/minseo2000" target="_blank" rel="noopener noreferrer" class="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-secondary/80 transition-colors">
             GitHub
           </a>
           <a href="#" class="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-secondary/80 transition-colors">
             LinkedIn
           </a>
-          <a href="#" class="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-secondary/80 transition-colors">
+          <a href="https://minseo2000.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-secondary/80 transition-colors">
             포트폴리오 사이트
           </a>
         </div>
@@ -176,15 +204,22 @@ permalink: /
       </div>
     </section>
     <section class="mb-8">
-      <h2 class="text-2xl font-semibold mb-4">소개</h2>
+      <h2 class="text-2xl font-semibold mb-4">연락처</h2>
       <div class="bg-card p-6 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
         <p class="text-card-foreground">
-          저는 박민서입니다. 이 블로그는 제 삶의 다양한 경험, 생각, 그리고 배움을 기록하고
-          공유하기 위해 시작했습니다. 기술, 문화, 일상, 그리고 더 많은 주제들을 다루고자 합니다.
+          궁금한 점이나 피드백이 있으시면 아래의 연락처로 언제든지 문의해주세요.
         </p>
+        <div class="flex flex-wrap gap-4 mt-4">
+          <a href="mailto:qkrwjstks@gmail.com" class="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-secondary/80 transition-colors">
+            이메일: qkrwjstks@gmail.com
+          </a>
+          <a href="tel:010-7339-4768" class="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-secondary/80 transition-colors">
+            전화번호: 010-7339-4768
+          </a>
+        </div>
       </div>
     </section>
-    <section>
+    <section class="mb-8">
       <h2 class="text-2xl font-semibold mb-4">카테고리</h2>
       <div class="flex flex-wrap gap-3">
         <button class="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-secondary/80 transition-colors">
@@ -198,6 +233,9 @@ permalink: /
         </button>
         <button class="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-secondary/80 transition-colors">
           여행
+        </button>
+        <button class="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-secondary/80 transition-colors">
+          AI
         </button>
       </div>
     </section>
