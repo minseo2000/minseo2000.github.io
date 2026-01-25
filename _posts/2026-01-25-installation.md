@@ -101,19 +101,19 @@ padding: 20px;
 
 <div class="photo-gallery">
 <div class="photo-item">
-<img src="https://bf.sbgpt.ddns.net/52921918-df01-42da-a139-44b705687ca0_pngegg (2).png" alt="블로그 설치 화면 1">
+<img src="https://bf.sbgpt.ddns.net/download/52921918-df01-42da-a139-44b705687ca0_pngegg (2).png" alt="블로그 설치 화면 1">
 <div class="photo-caption">설치 과정 확인</div>
 </div>
 <div class="photo-item">
-<img src="https://bf.sbgpt.ddns.net/52921918-df01-42da-a139-44b705687ca0_pngegg (2).png" alt="블로그 설치 화면 2">
+<img src="https://bf.sbgpt.ddns.net/download/52921918-df01-42da-a139-44b705687ca0_pngegg (2).png" alt="블로그 설치 화면 2">
 <div class="photo-caption">보안 설정 완료</div>
 </div>
 <div class="photo-item">
-<img src="https://bf.sbgpt.ddns.net/52921918-df01-42da-a139-44b705687ca0_pngegg (2).png" alt="블로그 설치 화면 3">
+<img src="https://bf.sbgpt.ddns.net/download/52921918-df01-42da-a139-44b705687ca0_pngegg (2).png" alt="블로그 설치 화면 3">
 <div class="photo-caption">안전성 점검 완료</div>
 </div>
 <div class="photo-item">
-<img src="https://bf.sbgpt.ddns.net/52921918-df01-42da-a139-44b705687ca0_pngegg (2).png" alt="블로그 설치 화면 4">
+<img src="https://bf.sbgpt.ddns.net/download/52921918-df01-42da-a139-44b705687ca0_pngegg (2).png" alt="블로그 설치 화면 4">
 <div class="photo-caption">최종 설치 확인</div>
 </div>
 </div>
