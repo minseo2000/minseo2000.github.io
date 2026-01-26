@@ -68,7 +68,7 @@ mermaid: true
     }
     .photo-caption {
       margin-top: 10px;
-      font-size: 0.95em; /* ✅ 캡션도 조금 더 키움 */
+      font-size: 0.95em;
       color: #7f8c8d;
       text-align: center;
     }
@@ -82,50 +82,50 @@ mermaid: true
     /* =========================
        ✅ 블로그 글 영역
        (설치 장소 사진과 담당자/연락처 사이)
-       ✅ 글씨 "더더" 크게 조정
+       ✅ 기존 대비 "1.5배" 크게 조정
     ========================= */
     .post-section {
       margin: 34px 0 10px;
-      padding: 26px;                 /* ✅ 여백도 조금 더 */
+      padding: 32px;                 /* 26px × 1.5 ≈ 39인데 과하게 느껴져 32로 안정화 */
       border: 1px solid #e5e7eb;
       border-radius: 14px;
       background: #ffffff;
     }
     .post-title {
-      margin: 0 0 16px;
-      font-size: 2.05rem;            /* ✅ 제목 더 크게 */
+      margin: 0 0 22px;              /* 16px × 1.5 */
+      font-size: 3.075rem;           /* 2.05rem × 1.5 */
       font-weight: 900;
       color: #2c3e50;
       border-left: 5px solid #3498db;
-      padding-left: 12px;
+      padding-left: 18px;            /* 12px × 1.5 */
       letter-spacing: -0.3px;
     }
     .post-body {
       color: #222;
-      line-height: 2.05;             /* ✅ 더 넉넉하게 */
-      font-size: 1.55rem;            /* ✅ 본문 더 크게 */
+      line-height: 3.075;            /* 2.05 × 1.5 */
+      font-size: 2.325rem;           /* 1.55rem × 1.5 */
       letter-spacing: -0.2px;
-      word-break: keep-all;          /* ✅ 한글 가독성 */
+      word-break: keep-all;
     }
     .post-body p {
-      margin: 0 0 18px;
+      margin: 0 0 27px;              /* 18px × 1.5 */
     }
     .post-body ul,
     .post-body ol {
-      margin: 0 0 18px 30px;         /* ✅ 들여쓰기 증가 */
+      margin: 0 0 27px 45px;         /* 18px/30px × 1.5 */
       padding: 0;
     }
     .post-body li {
-      margin: 10px 0;
+      margin: 15px 0;                /* 10px × 1.5 */
     }
     .post-body .info-box {
-      margin-top: 18px;
-      padding: 18px 20px;
+      margin-top: 27px;              /* 18px × 1.5 */
+      padding: 27px 30px;            /* 18/20 × 1.5 */
       background: #f8fafc;
       border: 1px solid #e5e7eb;
       border-radius: 12px;
-      font-size: 1.45rem;            /* ✅ 박스 글씨도 더 크게 */
-      line-height: 2.0;
+      font-size: 2.175rem;           /* 1.45rem × 1.5 */
+      line-height: 3.0;              /* 2.0 × 1.5 */
     }
     .post-body .info-box strong {
       color: #2c3e50;
@@ -151,7 +151,7 @@ mermaid: true
 
     .contact-grid {
       display: grid;
-      grid-template-columns: 1fr 3fr; /* ✅ 무조건 1:3 */
+      grid-template-columns: 1fr 3fr;
       gap: 18px;
       align-items: stretch;
     }
@@ -160,11 +160,9 @@ mermaid: true
       border: 1px dashed #cbd5e1;
       border-radius: 14px;
       background: #fff;
-
-      height: var(--contact-row-h); /* ✅ 두 박스 높이 동일 */
+      height: var(--contact-row-h);
       padding: 12px;
       box-sizing: border-box;
-
       display: block;
       min-height: 0;
     }
@@ -180,7 +178,6 @@ mermaid: true
       box-sizing: border-box;
     }
 
-    /* 내 사진: 꽉 차게 */
     .profile-photo img {
       width: 100%;
       height: 100%;
@@ -188,7 +185,6 @@ mermaid: true
       display: block;
     }
 
-    /* 명함: 전체가 다 보이게 */
     .business-card-img {
       cursor: zoom-in;
     }
@@ -261,20 +257,18 @@ mermaid: true
         grid-template-columns: 1fr;
       }
 
-      /* 모바일은 세로로 쌓기 */
       .contact-grid {
         grid-template-columns: 1fr;
       }
 
-      /* 모바일에서 보기 좋게 높이 조정 */
       .card-box {
         height: 200px;
       }
 
-      /* ✅ 모바일에서도 더 크게(너무 작게 줄이지 않기) */
-      .post-title { font-size: 1.75rem; }
-      .post-body  { font-size: 1.35rem; line-height: 1.95; }
-      .post-body .info-box { font-size: 1.25rem; }
+      /* ✅ 모바일에서도 1.5배 기준으로 큼직하게 */
+      .post-title { font-size: 2.625rem; }          /* 1.75 × 1.5 */
+      .post-body  { font-size: 2.025rem; line-height: 2.925; } /* 1.35 × 1.5, 1.95 × 1.5 */
+      .post-body .info-box { font-size: 1.875rem; line-height: 2.85; } /* 1.25 × 1.5, 1.9×1.5 느낌으로 */
     }
   </style>
 </head>
