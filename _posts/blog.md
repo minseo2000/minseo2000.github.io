@@ -1,3 +1,12 @@
+---
+title: 배터리 설치
+author: 박민서
+date: 2026-01-25
+category: 배터리설치
+layout: post
+mermaid: true
+---
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
