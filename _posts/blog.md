@@ -1,7 +1,7 @@
 ---
-title: 배터리 설치
+title: 배터리 설치2
 author: 박민서
-date: 2026-01-25
+date: 2026-01-26
 category: 배터리설치
 layout: post
 mermaid: true
@@ -78,7 +78,7 @@ mermaid: true
             text-align: right;
             margin-top: 30px;
             color: #7f8c8d;
-            font-style: italic;
+       [blog (1).md](..%2F..%2F..%2FDownloads%2Fblog%20%281%29.md)     font-style: italic;
         }
         .contact-section {
             margin-top: 40px;
