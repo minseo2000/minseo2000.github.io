@@ -2,7 +2,7 @@
 title: 배터리 설치2
 author: 박민서
 date: 2026-01-26
-category: 배터리설치
+category: 배터리설치2
 layout: post
 mermaid: true
 ---
