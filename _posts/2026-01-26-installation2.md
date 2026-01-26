@@ -82,6 +82,7 @@ mermaid: true
     /* =========================
        ✅ 블로그 글 영역
        (설치 장소 사진과 담당자/연락처 사이)
+       ✅ 글씨 "더" 크게 조정 완료
     ========================= */
     .post-section {
       margin: 34px 0 10px;
@@ -92,7 +93,7 @@ mermaid: true
     }
     .post-title {
       margin: 0 0 14px;
-      font-size: 1.45rem; /* ✅ 크게 */
+      font-size: 1.75rem; /* ✅ 더 크게 */
       font-weight: 800;
       color: #2c3e50;
       border-left: 4px solid #3498db;
@@ -100,27 +101,27 @@ mermaid: true
     }
     .post-body {
       color: #333;
-      line-height: 1.85;  /* ✅ 가독성 ↑ */
-      font-size: 1.15rem; /* ✅ 크게 */
+      line-height: 1.95;  /* ✅ 더 넉넉하게 */
+      font-size: 1.35rem; /* ✅ 더 크게 */
     }
     .post-body p {
-      margin: 0 0 12px;
+      margin: 0 0 14px;
     }
     .post-body ul,
     .post-body ol {
-      margin: 0 0 12px 20px;
+      margin: 0 0 14px 26px; /* ✅ 들여쓰기 조금 증가 */
       padding: 0;
     }
     .post-body li {
-      margin: 6px 0;
+      margin: 8px 0;
     }
     .post-body .info-box {
-      margin-top: 14px;
-      padding: 14px 16px;
+      margin-top: 16px;
+      padding: 16px 18px;
       background: #f8fafc;
       border: 1px solid #e5e7eb;
       border-radius: 12px;
-      font-size: 1.08rem; /* ✅ 박스 글씨도 조금 크게 */
+      font-size: 1.25rem; /* ✅ 박스 글씨도 더 크게 */
     }
     .post-body .info-box strong {
       color: #2c3e50;
@@ -265,9 +266,10 @@ mermaid: true
         height: 200px;
       }
 
-      /* ✅ 모바일에서 본문 너무 커 보이면 약간만 줄이기 */
-      .post-title { font-size: 1.3rem; }
-      .post-body  { font-size: 1.05rem; line-height: 1.8; }
+      /* ✅ 모바일에서도 큼직하게 유지 */
+      .post-title { font-size: 1.55rem; }
+      .post-body  { font-size: 1.25rem; line-height: 1.9; }
+      .post-body .info-box { font-size: 1.18rem; }
     }
   </style>
 </head>
