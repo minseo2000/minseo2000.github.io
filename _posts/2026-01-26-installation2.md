@@ -81,6 +81,52 @@ mermaid: true
     }
 
     /* =========================
+       ✅ 블로그 글 영역
+       (설치 장소 사진과 담당자/연락처 사이)
+    ========================= */
+    .post-section {
+      margin: 34px 0 10px;
+      padding: 22px;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      background: #ffffff;
+    }
+    .post-title {
+      margin: 0 0 14px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #2c3e50;
+      border-left: 4px solid #3498db;
+      padding-left: 10px;
+    }
+    .post-body {
+      color: #333;
+      line-height: 1.75;
+      font-size: 0.98rem;
+    }
+    .post-body p {
+      margin: 0 0 12px;
+    }
+    .post-body ul,
+    .post-body ol {
+      margin: 0 0 12px 20px;
+      padding: 0;
+    }
+    .post-body li {
+      margin: 6px 0;
+    }
+    .post-body .info-box {
+      margin-top: 14px;
+      padding: 14px 16px;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+    }
+    .post-body .info-box strong {
+      color: #2c3e50;
+    }
+
+    /* =========================
        담당자/연락처 섹션
        ✅ 핵심: 가로 1:3, 높이 고정
     ========================= */
@@ -227,7 +273,7 @@ mermaid: true
     <h1>서울대학교 병원 UPS 배터리 설치 완료!</h1>
 
     <div class="meta-info">
-      작성일: 2025.01.28<br />
+      작성일: 2026.01.28<br />
     </div>
 
     <p style="text-align:center;">
@@ -236,30 +282,64 @@ mermaid: true
 
     <div class="photo-gallery">
       <div class="photo-item">
-        <img src="https://bf.sbgpt.ddns.net/download/873aae1d-9b14-45bc-beee-a079da6426dc_pngegg (1).png" alt="배터리 설치 준비 사진">
+        <img src="https://bf.sbgpt.ddns.net/download/0351e896-0f79-4290-9024-f1c08b35ae4c_minseo.png" alt="배터리 설치 준비 사진">
         <div class="photo-caption">배터리 설치 준비 사진</div>
       </div>
 
       <div class="photo-item">
-        <img src="https://bf.sbgpt.ddns.net/download/dcd3d15b-fcec-40fc-b4d0-d77b588a4516_pngegg (2).png" alt="배터리 철거 후 사진">
+        <img src="https://bf.sbgpt.ddns.net/download/de9f5b23-f711-4d2a-9472-d497ad1fb1f9_minseo.png" alt="배터리 철거 후 사진">
         <div class="photo-caption">배터리 철거 후 사진</div>
       </div>
 
       <div class="photo-item">
-        <img src="https://bf.sbgpt.ddns.net/download/cde95a7a-41de-4302-b5e5-7b89586fdff1_pngegg (3).png" alt="배터리 설치 후 사진">
+        <img src="https://bf.sbgpt.ddns.net/download/640bc2dc-93ee-4055-a3d9-4e7509abcfd2_minseo.png" alt="배터리 설치 후 사진">
         <div class="photo-caption">배터리 설치 후 사진</div>
       </div>
 
       <div class="photo-item">
-        <img src="https://bf.sbgpt.ddns.net/download/46c5961a-208c-4bbc-be47-a4ec9222470b_pngwing.com (1).png" alt="배터리 전압 체크 사진">
+        <img src="https://bf.sbgpt.ddns.net/download/c7b37407-26cd-4d1b-8bd9-9bb8628509a0_minseo.png" alt="배터리 전압 체크 사진">
         <div class="photo-caption">배터리 전압 체크 사진</div>
       </div>
 
       <div class="photo-item full-width">
-        <img src="https://bf.sbgpt.ddns.net/download/9920b293-7d57-4acb-9d6d-3f73b0439e9c_pngwing.com (2).png" alt="설치 위치 장소 사진">
+        <img src="https://bf.sbgpt.ddns.net/download/63156cc0-b219-42c4-81c0-3ff46a63aa74_minseo1.jpg" alt="설치 위치 장소 사진">
         <div class="photo-caption">설치 위치 장소 사진</div>
       </div>
     </div>
+
+    <!-- ✅ 블로그 글 작성 영역 (설치 장소 사진 아래 / 담당자 섹션 위) -->
+    <section class="post-section">
+      <h2 class="post-title">작업 후기 / 상세 내용</h2>
+
+      <div class="post-body">
+        <p>
+          이번에 서울대학교 병원에서 UPS 시스템의 배터리 교체 작업을 완료했습니다. 
+          기존에 사용하던 배터리가 수명이 다되어 안정적인 전력 공급이 어려웠던 상황에서 
+          새로운 배터리로 교체하여 시스템의 신뢰성을 높였습니다.
+        </p>
+
+        <p>
+          설치 과정은 전문적인 팀이 진행했으며, 모든 단계에서 안전 규정을 준수했습니다. 
+          특히 배터리 철거 시에는 전원 차단 및 방전 작업을 꼼꼼히 수행하여 
+          장비 손상이나 사고 예방에 최선을 다했습니다.
+        </p>
+
+        <div class="info-box">
+          <p><strong>✅ 작업 요약</strong></p>
+          <ul>
+            <li>기존 배터리 철거 및 분리</li>
+            <li>신규 배터리 설치 및 배선 정리</li>
+            <li>전압/충전 상태 확인 및 최종 동작 테스트</li>
+          </ul>
+        </div>
+
+        <p>
+          설치 후에는 전압 및 충전 상태를 체크하고, UPS 시스템이 정상적으로 작동하는지 
+          여러 가지 테스트를 진행했습니다. 모든 테스트 결과 정상적으로 작동함을 확인하였습니다. 
+          이로 인해 병원 내 의료 장비의 지속적인 전력 공급이 가능해졌습니다.
+        </p>
+      </div>
+    </section>
 
     <div class="contact-section">
       <p class="contact-title">담당자 / 연락처</p>
@@ -268,22 +348,22 @@ mermaid: true
         <!-- ✅ 내 사진 (왼쪽 1) -->
         <div class="card-box">
           <div class="profile-photo">
-            <img src="https://bf.sbgpt.ddns.net/download/638f85d5-bb93-43a0-9562-9a91a409c315_minseo.png" alt="프로필 사진" />
+            <img src="https://bf.sbgpt.ddns.net/download/c6d65572-a442-416e-a71a-5561a7e0e929_minseo.png" alt="프로필 사진" />
           </div>
         </div>
 
         <!-- ✅ 명함 (오른쪽 3) -->
         <div class="card-box">
           <div class="business-card-img"
-               data-full="https://bf.sbgpt.ddns.net/download/757a77e8-c191-4fc9-80b1-ea6ec2931064_minseo1.jpg">
-            <img src="https://bf.sbgpt.ddns.net/download/757a77e8-c191-4fc9-80b1-ea6ec2931064_minseo1.jpg" alt="명함 이미지" />
+               data-full="https://bf.sbgpt.ddns.net/download/6db2b14e-cac3-4e62-8282-baeacbd00b94_minseo1.jpg">
+            <img src="https://bf.sbgpt.ddns.net/download/6db2b14e-cac3-4e62-8282-baeacbd00b94_minseo1.jpg" alt="명함 이미지" />
           </div>
         </div>
       </div>
     </div>
 
     <div class="footer">
-      본 글은 2025년 1월 28일 진행된 서울대학교 병원 UPS 배터리 설치 작업을 기반으로 작성되었습니다.
+      본 글은 2026년 1월 28일 진행된 서울대학교 병원 UPS 배터리 설치 작업을 기반으로 작성되었습니다.
     </div>
   </div>
 
