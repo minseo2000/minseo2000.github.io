@@ -82,50 +82,50 @@ mermaid: true
     /* =========================
        ✅ 블로그 글 영역
        (설치 장소 사진과 담당자/연락처 사이)
-       ✅ 기존 대비 "1.5배" 크게 조정
+       ✅ "1.2배" 크기로 조정
     ========================= */
     .post-section {
       margin: 34px 0 10px;
-      padding: 32px;                 /* 26px × 1.5 ≈ 39인데 과하게 느껴져 32로 안정화 */
+      padding: 31px;                 /* 26px × 1.2 ≈ 31px */
       border: 1px solid #e5e7eb;
       border-radius: 14px;
       background: #ffffff;
     }
     .post-title {
-      margin: 0 0 22px;              /* 16px × 1.5 */
-      font-size: 3.075rem;           /* 2.05rem × 1.5 */
+      margin: 0 0 19px;              /* 16px × 1.2 ≈ 19px */
+      font-size: 2.46rem;            /* 2.05rem × 1.2 */
       font-weight: 900;
       color: #2c3e50;
       border-left: 5px solid #3498db;
-      padding-left: 18px;            /* 12px × 1.5 */
+      padding-left: 14px;            /* 12px × 1.2 ≈ 14px */
       letter-spacing: -0.3px;
     }
     .post-body {
       color: #222;
-      line-height: 3.075;            /* 2.05 × 1.5 */
-      font-size: 2.325rem;           /* 1.55rem × 1.5 */
+      line-height: 2.46;             /* 2.05 × 1.2 */
+      font-size: 1.86rem;            /* 1.55rem × 1.2 */
       letter-spacing: -0.2px;
       word-break: keep-all;
     }
     .post-body p {
-      margin: 0 0 27px;              /* 18px × 1.5 */
+      margin: 0 0 22px;              /* 18px × 1.2 ≈ 22px */
     }
     .post-body ul,
     .post-body ol {
-      margin: 0 0 27px 45px;         /* 18px/30px × 1.5 */
+      margin: 0 0 22px 36px;         /* 18px/30px × 1.2 */
       padding: 0;
     }
     .post-body li {
-      margin: 15px 0;                /* 10px × 1.5 */
+      margin: 12px 0;                /* 10px × 1.2 */
     }
     .post-body .info-box {
-      margin-top: 27px;              /* 18px × 1.5 */
-      padding: 27px 30px;            /* 18/20 × 1.5 */
+      margin-top: 22px;              /* 18px × 1.2 ≈ 22px */
+      padding: 22px 24px;            /* 18/20 × 1.2 */
       background: #f8fafc;
       border: 1px solid #e5e7eb;
       border-radius: 12px;
-      font-size: 2.175rem;           /* 1.45rem × 1.5 */
-      line-height: 3.0;              /* 2.0 × 1.5 */
+      font-size: 1.74rem;            /* 1.45rem × 1.2 */
+      line-height: 2.4;              /* 2.0 × 1.2 */
     }
     .post-body .info-box strong {
       color: #2c3e50;
@@ -265,10 +265,10 @@ mermaid: true
         height: 200px;
       }
 
-      /* ✅ 모바일에서도 1.5배 기준으로 큼직하게 */
-      .post-title { font-size: 2.625rem; }          /* 1.75 × 1.5 */
-      .post-body  { font-size: 2.025rem; line-height: 2.925; } /* 1.35 × 1.5, 1.95 × 1.5 */
-      .post-body .info-box { font-size: 1.875rem; line-height: 2.85; } /* 1.25 × 1.5, 1.9×1.5 느낌으로 */
+      /* ✅ 모바일에서도 1.2배 기준 */
+      .post-title { font-size: 2.10rem; }                 /* 1.75 × 1.2 */
+      .post-body  { font-size: 1.62rem; line-height: 2.34; } /* 1.35 × 1.2, 1.95 × 1.2 */
+      .post-body .info-box { font-size: 1.50rem; line-height: 2.28; } /* 1.25 × 1.2, 1.9 × 1.2 */
     }
   </style>
 </head>
