@@ -1,5 +1,4 @@
 ---
-title: 배터리 설치2
 author: 박민서
 date: 2026-01-26
 category: 배터리설치2
@@ -93,7 +92,7 @@ mermaid: true
     }
     .post-title {
       margin: 0 0 14px;
-      font-size: 1.15rem;
+      font-size: 1.45rem; /* ✅ 크게 */
       font-weight: 800;
       color: #2c3e50;
       border-left: 4px solid #3498db;
@@ -101,8 +100,8 @@ mermaid: true
     }
     .post-body {
       color: #333;
-      line-height: 1.75;
-      font-size: 0.98rem;
+      line-height: 1.85;  /* ✅ 가독성 ↑ */
+      font-size: 1.15rem; /* ✅ 크게 */
     }
     .post-body p {
       margin: 0 0 12px;
@@ -121,6 +120,7 @@ mermaid: true
       background: #f8fafc;
       border: 1px solid #e5e7eb;
       border-radius: 12px;
+      font-size: 1.08rem; /* ✅ 박스 글씨도 조금 크게 */
     }
     .post-body .info-box strong {
       color: #2c3e50;
@@ -264,6 +264,10 @@ mermaid: true
       .card-box {
         height: 200px;
       }
+
+      /* ✅ 모바일에서 본문 너무 커 보이면 약간만 줄이기 */
+      .post-title { font-size: 1.3rem; }
+      .post-body  { font-size: 1.05rem; line-height: 1.8; }
     }
   </style>
 </head>
@@ -313,14 +317,14 @@ mermaid: true
 
       <div class="post-body">
         <p>
-          이번에 서울대학교 병원에서 UPS 시스템의 배터리 교체 작업을 완료했습니다. 
-          기존에 사용하던 배터리가 수명이 다되어 안정적인 전력 공급이 어려웠던 상황에서 
+          이번에 서울대학교 병원에서 UPS 시스템의 배터리 교체 작업을 완료했습니다.
+          기존에 사용하던 배터리가 수명이 다되어 안정적인 전력 공급이 어려웠던 상황에서
           새로운 배터리로 교체하여 시스템의 신뢰성을 높였습니다.
         </p>
 
         <p>
-          설치 과정은 전문적인 팀이 진행했으며, 모든 단계에서 안전 규정을 준수했습니다. 
-          특히 배터리 철거 시에는 전원 차단 및 방전 작업을 꼼꼼히 수행하여 
+          설치 과정은 전문적인 팀이 진행했으며, 모든 단계에서 안전 규정을 준수했습니다.
+          특히 배터리 철거 시에는 전원 차단 및 방전 작업을 꼼꼼히 수행하여
           장비 손상이나 사고 예방에 최선을 다했습니다.
         </p>
 
@@ -334,8 +338,8 @@ mermaid: true
         </div>
 
         <p>
-          설치 후에는 전압 및 충전 상태를 체크하고, UPS 시스템이 정상적으로 작동하는지 
-          여러 가지 테스트를 진행했습니다. 모든 테스트 결과 정상적으로 작동함을 확인하였습니다. 
+          설치 후에는 전압 및 충전 상태를 체크하고, UPS 시스템이 정상적으로 작동하는지
+          여러 가지 테스트를 진행했습니다. 모든 테스트 결과 정상적으로 작동함을 확인하였습니다.
           이로 인해 병원 내 의료 장비의 지속적인 전력 공급이 가능해졌습니다.
         </p>
       </div>
