@@ -7,7 +7,6 @@ layout: post
 mermaid: true
 ---
 
-<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
